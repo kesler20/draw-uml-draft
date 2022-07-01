@@ -16,18 +16,96 @@
     <title>drawUML</title>
   </head>
   <body>
-    <div class="container">
 
-    <div class="diagram">
-        <div class="uml">
-          <input type="text" placeholder="Object Name" class="object-name">
-            <div class="grid-table"></div>
-          </div>
-          <div class="dragBtn"><i class="fas fa-plus"></i></div>
-        </div>
+    <section>
+    <div class="site-info flex-row">
+      <div class="info flex-row">
+        <h1>drawUML</h1>
+        <p>Verison 0.0.1</p>
+      </div>
+      <div class="info-btn flex-row">
+        <button class="btn info-btn">
+          Create Table
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 15 15"
+            width="12"
+            height="12"
+            style="margin-left: 0.33em"
+          >
+            <g
+              stroke="currentColor"
+              stroke-width="1.75"
+              fill="none"
+              fill-rule="evenodd"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M4.497 1H3a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-1.5h0"
+                opacity=".6"
+              ></path>
+              <path d="M9 1.008L14 1v5M14 1L6 9"></path>
+            </g>
+          </svg>
+        </button>
+        <i class="fa fa-question-circle fa-2x"></i>
       </div>
     </div>
+  </section>
 
+  <section>
+    <div class="features grid">
+      <div class="functionality flex-row">
+      </div>
+      <div class="feedback flex-row">
+        <a href="" class="flex-row">
+          <i class="fa fa-comment-alt fa-2x"></i>
+          <p>Send Feedback</p>
+        </a>
+        <i class="fa fa-cog fa-2x"></i>
+      </div>
+      <a href="#" class="visualisation flex-row">
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="data grid">
+      <div class="thing-list function-list flex-column">
+      </div>
+      <div class="data-model-canvas flex-row">
+        <div class="flex-column">
+          <div class="container">
+            <a href="#">
+              <div class="create-thing-btn flex-row">
+                <div class="flex-row">
+                  <h4>Create Thing</h4>
+                  <i class="fa fa-microchip"></i>
+                </div>
+              </div>
+            </a>
+            <a href="#"
+              ><div class="delete-thing-btn">
+                <i class="fa fa-trash fa-2x"></i>
+              </div>
+            </a>
+            <div class="diagram">
+                <div class="uml">
+                  <input type="text" placeholder="Object Name" class="object-name">
+                    <div class="grid-table"></div>
+                  </div>
+                  <div class="dragBtn"><i class="fas fa-plus"></i></div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="data-model data-model-grid"></div>
+      </div>
+      <div class="thing-list flex-column">
+      </div>
+    </div>
+  </section>
 
     <script src="/static/js/index.js"></script>
   </body>
