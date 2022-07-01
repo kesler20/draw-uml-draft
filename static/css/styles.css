@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  --primary-font-color: rgb(56, 56, 56);
+}
+
+body {
+  background-color: #eff2f7;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  margin: 0% 20%;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 10%;
+}
+
+input {
+  outline-color: #8d38cd;
+  border: 0.5px solid #f3f2f5;
+  padding: 7px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color:  darkslategray;
+  text-align: center;
+}
+
+.container {
+  width: 90%;
+  margin-top: 5%;
+}
+
+.arrowBtn {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  color: #8d38cd;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 5px 40px rgb(158, 158, 158);
+  outline: none;
+  margin: 10% 30% 5%;
+}
+
+.dragBtn {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #8d38cd;
+  border: none;
+  font-size: 1.4em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 5px 40px rgb(158, 158, 158);
+  outline: none;
+  transform: translate(-100%, -0%);
+}
+
+.dragBtn:hover {
+  box-shadow: 5px 5px 40px #945fbd;
+}
+
+.diagram {
+  position: absolute;
+  cursor: pointer;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+/*--- #e0d8ed ---*/
+
+.grid-table {
+  display: grid;
+  grid-template-columns: 10% 60% 15% 15%;
+  border-radius: 30px;
+  justify-content: center;
+  box-shadow: 5px 5px 40px rgb(230, 221, 221);
+  text-align: center;
+}
+
+
+.object-name {
+  font-style: italic;
+  font-weight: 700;
+  font-size: 2rem;
+  border-top: 25px solid #8d38cd;
+  border-radius: 8px;
+  background-color: darkslategray;
+  width: 85%;
+  color: white;
+} 
