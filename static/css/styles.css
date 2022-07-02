@@ -14,7 +14,6 @@
 }
 
 body {
-  background-color: #eff2f7;
   font-family: "Poppins", sans-serif;
   height: 100vh;
 }
@@ -28,15 +27,10 @@ input {
   outline-color: #8d38cd;
   border: 0.5px solid #f3f2f5;
   padding: 7px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: darkslategray;
   text-align: center;
-}
-
-.container {
-  width: 90%;
-  margin-top: 5%;
 }
 
 .arrowBtn {
@@ -55,28 +49,11 @@ input {
   margin: 10% 30% 5%;
 }
 
-.dragBtn {
-  height: 60px;
-  width: 60px;
-  border-radius: 50%;
-  background-color: #8d38cd;
-  border: none;
-  font-size: 1.4em;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 5px 5px 40px rgb(158, 158, 158);
-  outline: none;
-  transform: translate(-100%, -0%);
-}
-
-.dragBtn:hover {
-  box-shadow: 5px 5px 40px #945fbd;
+.arrowBtn:hover {
+  box-shadow: 5px 5px 40px rgb(124, 121, 121);
 }
 
 .diagram {
-  position: absolute;
   cursor: pointer;
   position: absolute;
   transform: translate(-50%, -50%);
@@ -85,6 +62,7 @@ input {
 /*--- #e0d8ed ---*/
 
 .grid-table {
+  width: 500px;
   display: grid;
   grid-template-columns: 10% 60% 15% 15%;
   border-radius: 30px;
@@ -93,19 +71,19 @@ input {
   text-align: center;
 }
 
-.object-name {
+input.object-name {
   font-style: italic;
   font-weight: 700;
-  font-size: 2rem;
-  border-top: 25px solid #8d38cd;
+  font-size: 1.4rem;
   border-radius: 8px;
-  background-color: darkslategray;
+  color: var(--model-canvas-color);
+  background-color: rgb(67, 136, 136);
   width: 85%;
-  color: white;
+  outline-color: #7a86e1;
 }
 
-.container {
-  font-family: "Lato" Arial, sans-serif;
+input.object-name::placeholder {
+  color: whitesmoke;
 }
 
 /*-------------------------------------------------General Styling --------------------*/
@@ -139,10 +117,11 @@ p {
   align-items: center;
   flex-direction: row;
   font-weight: 500;
+  /* global 94%+ browsers support */
   background: linear-gradient(
     90deg,
-    rgba(76, 175, 80, 1) 0%,
-    rgba(49, 220, 255, 1) 100%
+    rgba(0, 0, 255, 1) 0%,
+    rgba(238, 130, 238, 1) 100%
   );
   border: none;
   color: white;
@@ -158,7 +137,7 @@ p {
 
 .grid {
   display: grid;
-  grid-template-columns: 10% 82% 8%;
+  grid-template-columns: 10% 90%;
 }
 
 /*--------------------------------------------------Site Info -------------------------*/
@@ -171,6 +150,10 @@ p {
   justify-content: space-between;
 }
 
+.site-info i {
+  cursor: pointer;
+}
+
 a {
   text-decoration: none;
   outline: none;
@@ -181,19 +164,17 @@ li {
   list-style: none;
 }
 
-.info-btn i {
+.create-table-btn i {
   margin-left: 50px;
   color: var(--secondary-color);
 }
 
 .site-info h1 {
   font-size: 2.2rem;
-  /* global 92%+ browsers support */
   background: linear-gradient(
     90deg,
-    rgba(0, 255, 235, 1) 36%,
-    rgba(0, 255, 235, 1) 39%,
-    rgba(7, 58, 187, 1) 100%
+    rgba(0, 0, 255, 1) 0%,
+    rgba(238, 130, 238, 1) 100%
   );
   background-repeat: no-repeat;
   -webkit-text-fill-color: transparent;
@@ -283,8 +264,10 @@ li {
 /*--------------------------------------------------Data-------------------------*/
 
 .data-model-canvas {
+  overflow: hidden;
   border: 0.5px solid var(--lines-color);
-  height: 80vh;
+  height: 90vh;
+  position: relative;
   justify-content: flex-start;
   align-items: flex-start;
   background-color: var(--model-canvas-color);
@@ -294,40 +277,9 @@ li {
   justify-content: space-around;
 }
 
-.create-thing-btn:hover {
-  box-shadow: 2px 1px 4px grey;
-  transform: skewY(2deg);
-  color: var(--secondary-color);
-}
-
 .function-list {
   margin: 10px;
   border: 0.5px solid var(--lines-color);
-}
-
-.create-thing-btn {
-  border: solid 1px rgb(221, 220, 220);
-  border-radius: 5px;
-  background-color: white;
-  margin: 25%;
-  width: 150px;
-  height: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  word-break: break-word;
-  padding: 15px;
-  font-family: var(--another-font-family);
-  font-weight: 400;
-  box-shadow: 10px 10px 14px 12px rgb(236, 236, 236);
-  color: #202124;
-}
-
-.create-thing-btn .flex-row h4 {
-  margin-right: 10px;
 }
 
 .delete-thing-btn {
@@ -345,36 +297,6 @@ li {
   box-shadow: 2px 1px 4px grey;
   color: red;
   transform: skewY(2deg);
-}
-
-.thing-list {
-  justify-content: flex-start;
-}
-
-.thing-list li {
-  height: 40px;
-  width: 160px;
-  padding: 2px;
-  border: 1px solid black;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 500;
-  margin: 20px;
-}
-
-.thing-list li:hover {
-  color: var(--secondary-color);
-  border: 1px solid var(--secondary-color);
-}
-
-.thing-card {
-  height: 180px;
-  width: 150px;
-  border-radius: 5px;
-  color: black;
-  box-shadow: 10px 10px 10px 10px var(--text-color);
 }
 
 .data-model-grid {
