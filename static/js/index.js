@@ -1,16 +1,31 @@
+const diagram = document.querySelector(".diagram");
 const objectName = document.querySelectorAll(".object-name").item(0);
 const dataModelCanvas = document.querySelector(".data-model-canvas");
 const createTableBtn = document
   .getElementsByClassName("create-table-btn")
   .item(0);
-
 class Line {
   constructor(from, to) {
     this.from = from;
     this.to = to;
   }
+
   connect = () => {
-    const connection = document.createElement("svg");
+    let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute(
+      "viewBox",
+      `${this.from[0]} ${this.from[1]} ${this.to[0]} ${this.to[1]}`
+    );
+    svg.setAttribute("aria-hidden", "true");
+    let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "blue");
+    path.setAttribute(
+      "d",
+      `M ${this.from[0]},${this.from[1]} L ${this.to[0]}, ${this.to[1]}`
+    );
+    svg.appendChild(path);
+    dataModelCanvas.appendChild(svg);
   };
 }
 class UmlDiagramTable {
@@ -41,6 +56,7 @@ class UmlDiagramTable {
 
     enableDrag();
     enableNavigation();
+    trackElement(diagram);
   };
 }
 
@@ -102,9 +118,13 @@ const addRow = (e) => {
   umlTable.appendChild(arrowBtn);
   diagramRow2.focus();
 
-  arrowBtn.addEventListener('click', (e) => {
-    createLine(e)
-  })
+  // arrowBtn.addEventListener("click", (e) => {
+  //   let diagramToTrack =
+  //   e.target.parentNode.parentNode.parentNode.classList.value === "diagram"
+  //   ? e.target.parentNode.parentNode.parentNode
+  //   : e.target.parentNode.parentNode.parentNode.parentNode;
+  //   trackElement(diagramToTrack);
+  // });
 };
 
 const deleteRow = (e) => {
@@ -164,25 +184,67 @@ const enableNavigation = () => {
   });
 };
 
-objectName.style.borderTop = `25px solid ${getRandomColor()}`;
+// only the diagram needs to be tracked as is the only element which can be moved
+const trackElement = (diagram) => {
+  const getPosition = () => {
+    return [parseInt(diagram.style.left), parseInt(diagram.style.top)];
+  };
 
-const createLine = (e) => {
+  // draw a line from the element being tracked to the screen
+  const trackMouse = () => {
+    let line = new Line(
+      [getPosition()[0], getPosition()[1]],
+      [getPosition()[0] + 20, getPosition()[1] + 20]
+    );
+    line.connect();
+  };
+
+  diagram.addEventListener("mousedown", () => {
+    window.addEventListener("mousemove", trackMouse);
+  });
+
+  window.addEventListener("mouseup", () => {
+    window.removeEventListener("mousemove", trackMouse);
+  });
+};
+
+// yDistance is the difference in top position between the two elements
+const generateBelzierCurve = (x1, y1, xDistance, yDistance) => {
+  let c = 5;
+  let d = yDistance - 2 * c;
+  let x2 = x1 + d + c;
+  let p = xDistance - x2 - 2 * c;
+  return `M ${x1},${y1} L ${x2}, ${y1} Q ${x2 + c}, ${y1}  ${x2 + c}, ${
+    y1 + c
+  } L ${x2 + c}, ${y1 + c + d} Q ${x2 + c}, ${y1 + 2 * c + d}  ${x2 + 2 * c}, ${
+    y1 + 2 * c + d
+  } L ${x2 + 2 * c + p}, ${y1 + 2 * c + d}`;
+};
+
+const createLine = () => {
   let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("class", "octicon octicon-star");
   svg.setAttribute("viewBox", "0 0 800 800");
   svg.setAttribute("aria-hidden", "true");
-  
+
   let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "blue");
   path.setAttribute(
     "d",
-    `M ${e.pageX},${e.pageY} L 25, 0 Q 30, 0  30, 5 L 30, 25 Q 30, 30  35, 30 L 100, 30`
+    generateBelzierCurve(
+      getPosition()[0],
+      getPosition()[1],
+      getPosition()[0] + 100,
+      getPosition()[1] + 200
+    )
   );
-  
+
   svg.appendChild(path);
   dataModelCanvas.appendChild(svg);
-}
+};
+
+objectName.style.borderTop = `25px solid ${getRandomColor()}`;
 
 enableDrag();
 enableNavigation();
@@ -191,3 +253,4 @@ createTableBtn.addEventListener("click", () => {
   table = new UmlDiagramTable("this");
   table.createTable();
 });
+
